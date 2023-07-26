@@ -1,4 +1,4 @@
-import { Length } from "class-validator";
+import { IsDate, Length } from "class-validator";
 import { BodyCanActivate } from "./emploee.register.dto";
 
 export class EmploeeLoginDto extends BodyCanActivate {

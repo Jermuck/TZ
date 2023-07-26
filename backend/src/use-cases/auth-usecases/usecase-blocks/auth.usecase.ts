@@ -30,16 +30,12 @@ export class AuthUseCase {
   };
 
   public async registerEmploee(data: EmploeeRegisterDto): Promise<ResultAuthorization.IResultRegister> {
-    console.log(await this.bcrypt.hash("123456789"))
     const isExistEmploee = await this.UserRepository.findUniqueBySurname(data.surname);
     if (isExistEmploee) throw new BadRequestException('This emploee already exist');
-    const createdEmploee = await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE' });
-    const [access, refresh] = this.generateTokens(createdEmploee);
-    console.log(access);
-    await this.TokenRepository.createWithoutRelationUser(refresh, createdEmploee.id);
-    const header = this.generateHeader(refresh);
+    delete data._id;
+    await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday) });
     const link = uuidv4();
-    return { header, link };
+    return { link };
   };
 
   public async login(data: EmploeeLoginDto): Promise<ResultAuthorization.IResultLogin> {

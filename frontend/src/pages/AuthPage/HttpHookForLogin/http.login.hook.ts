@@ -3,21 +3,14 @@ import { ILoginDtoUser } from "../../../../types/index.types";
 import { AuthController } from "../../../http/controllers/AuthController/auth.controller";
 import { setUser } from "../../../store/UserStore/user.store";
 
-interface IErrorInput {
-  key: keyof ILoginDtoUser;
-  isError: boolean;
-};
 
 interface IUseLogin {
   login: (user: ILoginDtoUser) => Promise<void>;
-  error: IErrorInput[];
+  error: boolean;
 }
 
 export const useLogin = (): IUseLogin => {
-  const [error, setError] = useState<IErrorInput[]>([
-    { key: 'name', isError: false }, { key: 'surname', isError: false },
-    { key: 'patronymic', isError: false }, { key: 'password', isError: false }
-  ]);
+  const [error, setError] = useState<boolean>(false);
 
   async function login(user: ILoginDtoUser): Promise<void> {
     try {
@@ -26,16 +19,8 @@ export const useLogin = (): IUseLogin => {
       localStorage.setItem('access', data.data.access);
       setUser(data.data.user);
     } catch (err) {
-      setError(prev => prev.map(el => {
-        el.isError = true;
-        return el;
-      }));
-      setTimeout(() => {
-        setError(prev => prev.map(el => {
-          el.isError = false;
-          return el;
-        })); 
-      }, 400)
+      setError(true);
+      setTimeout(() => setError(false), 400)
     }
   };
 

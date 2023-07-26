@@ -5,6 +5,7 @@ import { AuthUseCase } from "src/use-cases/auth-usecases/usecase-blocks/auth.use
 import { EmploeeLoginDto } from "./dto/emploee.login.dto";
 import { BodyCanActivate, EmploeeRegisterDto } from "./dto/emploee.register.dto";
 import { AuthGuard } from "src/infrastructure/common/guards/auth.guard";
+import { JobTitleGuard } from "src/infrastructure/common/guards/jobTitle.guard";
 
 @Controller("/auth")
 export class AuthController {
@@ -15,9 +16,9 @@ export class AuthController {
 
   @Post('/emploee/register')
   @HttpCode(200)
+  @UseGuards(JobTitleGuard)
   public async adminRegister(@Body() dto: EmploeeRegisterDto, @Request() req: Req) {
-    const { link, header } = await this.AuthorizationUseCaseInstanse.registerEmploee(dto);
-    req.res.setHeader('Set-Cookie', header);
+    const { link } = await this.AuthorizationUseCaseInstanse.registerEmploee(dto);
     return link;
   };
 

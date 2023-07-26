@@ -14,10 +14,11 @@ export interface IUser {
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: 'HR-MANAGER' | 'EMPLOEE';
+  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
   salary: number;
   password: string;
   dateStartWork: Date;
+  dateBirthday: Date;
 };
 
 export interface ILoginResponse {

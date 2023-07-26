@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { ILoginDtoUser, ILoginResponse, ILogoutResponse, IResponseData } from "../../../../types/index.types"
 import { $api } from "../../config/http.config";
+import { IEmploee } from "../../../components/ModalItems/ModalItems";
 
 export class AuthController {
   static getInstance() {
@@ -17,5 +18,9 @@ export class AuthController {
 
   public async logout(): Promise<AxiosResponse<IResponseData<ILogoutResponse>>>{
     return await $api.post<IResponseData<ILogoutResponse>>('/auth/logout');
+  };
+
+  public async cretateEmploee(data: IEmploee): Promise<AxiosResponse<IResponseData<string>>>{
+    return await $api.post<IResponseData<string>>('/auth/emploee/register', data);
   }
 }

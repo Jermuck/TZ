@@ -20,6 +20,7 @@ model EmploeeEntity {
   jobTitle      JonTitle
   salary        Int?
   password      String?
+  dateBirthday DateTime
   dateStartWork DateTime     @default(now())
   token         TokenEntity?
 }

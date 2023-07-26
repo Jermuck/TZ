@@ -1,10 +1,10 @@
-import { IsNumber, Length } from "class-validator";
+import { IsDataURI, IsDate, IsDateString, IsNumber, Length, isDateString } from "class-validator";
 
 export class BodyCanActivate {
   public _id: string;
 }
 
-export class EmploeeRegisterDto {
+export class EmploeeRegisterDto extends BodyCanActivate {
   @Length(2, 25)
   public name: string;
 
@@ -17,4 +17,6 @@ export class EmploeeRegisterDto {
   @IsNumber()
   public salary: number;
 
+  @IsDateString()
+  public dateBirthday: Date;
 }  
