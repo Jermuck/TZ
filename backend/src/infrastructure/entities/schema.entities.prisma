@@ -1,0 +1,32 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum JonTitle {
+  HR_MANAGER
+  EMPLOEE
+}
+
+model EmploeeEntity {
+  id            String       @id @default(uuid())
+  name          String
+  surname       String       @unique
+  patronymic    String
+  jobTitle      JonTitle
+  salary        Int?
+  password      String?
+  dateStartWork DateTime     @default(now())
+  token         TokenEntity?
+}
+
+model TokenEntity {
+  id        String         @id @default(uuid())
+  token     String
+  emploee   EmploeeEntity? @relation(fields: [emploeeId], references: [id])
+  emploeeId String?        @unique
+}
