@@ -16,7 +16,7 @@ export interface IUser {
   patronymic: string;
   jobTitle: 'HR_MANAGER' | 'EMPLOEE';
   salary: number;
-  password: string;
+  password: string | null;
   dateStartWork: Date;
   dateBirthday: Date;
 };
@@ -28,4 +28,17 @@ export interface ILoginResponse {
 
 export interface ILogoutResponse{
   message: string;
-}
+};
+
+
+export interface IUserForTable {
+  id: string;
+  name: string;
+  surname: string;
+  patronymic: string;
+  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
+  salary: number;
+  password: boolean;
+  dateStartWork: Date;
+  dateBirthday: Date;
+};

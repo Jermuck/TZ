@@ -51,5 +51,11 @@ export class UserRepository implements UserAbstractReposiotory {
     return await this.prisma.emploeeEntity.update({
       where: {id}, data: {link: null}
     })
+  };
+
+  public async findManyWithJobTitleEmploee(): Promise<EmploeeEntity[]> {
+    return await this.prisma.emploeeEntity.findMany({
+      where: {jobTitle: 'EMPLOEE'}
+    })
   }
 }

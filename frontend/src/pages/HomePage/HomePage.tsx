@@ -6,6 +6,7 @@ import { InfoItem } from "../../UI/InfoItem/InfoItem";
 import { useLogout } from "./HttpHookForLogout/http.logout.hook";
 import { useState } from "react";
 import { ModalItems } from "../../components/ModalItems/ModalItems";
+import { useNavigate } from "react-router-dom";
 
 export interface IMessage{
     isOpen:boolean;
@@ -15,6 +16,7 @@ export interface IMessage{
 export const HomePage = () => {
     const user = useStore($user);
     const logout = useLogout();
+    const nav = useNavigate();
     const [isOpen, setModalOpen] = useState<boolean>(false);
     const [message, setMessage] = useState<IMessage>({isOpen: false, value: ''});
 
@@ -37,7 +39,7 @@ export const HomePage = () => {
                 <Box fontSize={25} color={'#FFFF'} marginLeft={15}> Home</Box>
                 <Box width={user?.jobTitle ==='HR_MANAGER' ? '35%' : '15%'} display={'flex'} justifyContent={'space-between'} marginRight={15}>
                     <Button style={{ background: '#343A4F', height: '60%' }} onClick={logout}>Logout</Button>
-                    <Button style={{ background: '#343A4F', height: '60%' }} >Statistic</Button>
+                    <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/statistic')}>Statistic</Button>
                     { user?.jobTitle ==='HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => setModalOpen(true)}>Create Emploee</Button>}
                 </Box>
             </Box>

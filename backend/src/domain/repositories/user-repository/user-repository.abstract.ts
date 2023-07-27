@@ -9,4 +9,5 @@ export abstract class UserAbstractReposiotory {
   abstract findUserByLink(link: string): Promise<EmploeeEntity | null>;
   abstract udpatePasswordById(id: string, password: string): Promise<EmploeeEntity>;
   abstract setLinkNullById(id: string): Promise<EmploeeEntity>;
+  abstract findManyWithJobTitleEmploee(): Promise<EmploeeEntity[]>;
 };
