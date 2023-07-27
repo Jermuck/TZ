@@ -31,6 +31,7 @@ export class EmploeeController {
     @HttpCode(200)
     @UseGuards(JobTitleGuard)
     public async update(@Body() dto: UpdateEmploeeDto){
+        console.log(dto)
         return await this.EmploeeUseCaseInstance.update(dto);
     }
 }

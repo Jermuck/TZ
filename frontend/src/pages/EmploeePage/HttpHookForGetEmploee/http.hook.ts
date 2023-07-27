@@ -1,5 +1,5 @@
 import { IUser, IUserForTable } from "../../../../types/index.types";
-import { EmploeeController } from "../../../http/controllers/EmploeeController/EmplooeController";
+import { EmploeeController } from "../../../http/controllers/EmploeeController/EmploeeController";
 
 export const asyncGetEmploee = async (): Promise<IUserForTable[]> => {
     try{
