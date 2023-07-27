@@ -4,7 +4,7 @@ export class BodyCanActivate {
   public _id: string;
 }
 
-export class EmploeeRegisterDto extends BodyCanActivate {
+export class EmploeeRegisterDto{
   @Length(2, 25)
   public name: string;
 

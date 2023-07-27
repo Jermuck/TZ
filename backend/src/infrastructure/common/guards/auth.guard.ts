@@ -19,10 +19,7 @@ export class AuthGuard implements CanActivate{
         if(!user || bearer !== "Bearer"){
             throw new UnauthorizedException();
         }
-        request.body = {
-            ...request.body,
-            _id: user.id
-        };
+        request.body._id = user.id;
         return true;
     }
 }

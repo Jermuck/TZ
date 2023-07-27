@@ -33,7 +33,6 @@ export class AuthUseCase {
   public async registerEmploee(data: EmploeeRegisterDto): Promise<ResultAuthorization.IResultRegister> {
     const isExistEmploee = await this.UserRepository.findUniqueBySurname(data.surname);
     if (isExistEmploee) throw new BadRequestException('This emploee already exist');
-    delete data._id;
     const link = uuidv4();
     await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday), link });
     return { link };

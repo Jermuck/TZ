@@ -29,6 +29,6 @@ model EmploeeEntity {
 model TokenEntity {
   id        String         @id @default(uuid())
   token     String
-  emploee   EmploeeEntity? @relation(fields: [emploeeId], references: [id])
+  emploee   EmploeeEntity? @relation(fields: [emploeeId], references: [id], onDelete: Cascade)
   emploeeId String?        @unique
 }

@@ -10,4 +10,5 @@ export abstract class UserAbstractReposiotory {
   abstract udpatePasswordById(id: string, password: string): Promise<EmploeeEntity>;
   abstract setLinkNullById(id: string): Promise<EmploeeEntity>;
   abstract findManyWithJobTitleEmploee(): Promise<EmploeeEntity[]>;
+  abstract updateFieldsWithUserId(id: string, data: EmploeeModel): Promise<EmploeeEntity>;
 };

@@ -20,10 +20,7 @@ export class JobTitleGuard implements CanActivate {
             throw new UnauthorizedException();
         }
         if(user.jobTitle !== 'HR_MANAGER') throw new BadRequestException('Dont have this role');
-        request.body = {
-            ...request.body,
-            _id: user.id
-        };
+        request.body._id = user.id;
         return true;
     }
 }
