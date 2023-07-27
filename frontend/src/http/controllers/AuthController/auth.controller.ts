@@ -22,5 +22,13 @@ export class AuthController {
 
   public async cretateEmploee(data: IEmploee): Promise<AxiosResponse<IResponseData<string>>>{
     return await $api.post<IResponseData<string>>('/auth/emploee/register', data);
-  }
+  };
+
+  public async validateLink(linkId: string): Promise<AxiosResponse<IResponseData<{message:string}>>>{
+    return await $api.post<IResponseData<{message: string}>>(`/auth/check${linkId}`)
+  };
+
+  public async createPassword(linkId: string, password: string): Promise<AxiosResponse<IResponseData<ILoginResponse>>>{
+    return await $api.post<IResponseData<ILoginResponse>>('/auth/password/create', {linkId, password})
+  };
 }

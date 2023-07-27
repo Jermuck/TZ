@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AuthController } from "../../../http/controllers/AuthController/auth.controller";
 import { IEmploee } from "../ModalItems";
-import { setMessage } from "../../../store/MessageStore/message.store";
 
 
 interface IUseCreateEmploee {
@@ -9,19 +8,27 @@ interface IUseCreateEmploee {
     error: boolean;
 }
 
-
 export const useCreateEmploee = (): IUseCreateEmploee => {
     const [error, setError] = useState<boolean>(false);
 
+    function showError(): void {
+            setError(true);
+            setTimeout(() => setError(false), 400)
+    }
+
     async function create(emploee: IEmploee): Promise<string | undefined> {
         try {
+            if(Object.values(emploee).length !== 5){
+                showError();
+                return;
+            }
             const apiInstace = AuthController.getInstance();
             const {data} = await apiInstace.cretateEmploee({...emploee, dateBirthday: new Date(emploee.dateBirthday).toISOString()});
             const linkId = data.data;
             return linkId;
         } catch (err:any) {
-            setError(true);
-            setTimeout(() => setError(false), 400)
+            console.log(err);
+            showError()
         }
     };
 

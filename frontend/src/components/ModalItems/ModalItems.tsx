@@ -1,7 +1,7 @@
 import { Alert, Box, Button, TextField, Snackbar } from "@mui/material"
 import { FC, useState } from "react";
 import { useCreateEmploee } from "./HttpForCreateEmploee/http.hook";
-import { setMessage } from "../../store/MessageStore/message.store";
+import { IMessage } from "../../pages/HomePage/HomePage";
 
 export interface IEmploee {
     name: string;
@@ -9,9 +9,14 @@ export interface IEmploee {
     patronymic: string;
     dateBirthday: Date | string
     salary: number;
+};
+
+interface IModalItems{
+    setModal: (value: boolean) => void;
+    setMessage: (target: IMessage) => void;
 }
 
-export const ModalItems: FC<{setModal: (value: boolean) => void}> = ({setModal}) => {
+export const ModalItems: FC<IModalItems> = ({setModal, setMessage}) => {
     const [emploee, setEmploee] = useState<IEmploee>({} as IEmploee);
     const { error, create } = useCreateEmploee();
 

@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { EmploeeRegisterDto } from "src/infrastructure/controllers/auth/dto/emploee.register.dto";
 import { ResultAuthorization } from "../response-data/response.interfaces";
 import { EmploeeLoginDto } from "src/infrastructure/controllers/auth/dto/emploee.login.dto";
+import { CreatePasswordDto } from "src/infrastructure/controllers/auth/dto/createPassword.dto";
 
 export class AuthUseCase {
   constructor(
@@ -33,8 +34,8 @@ export class AuthUseCase {
     const isExistEmploee = await this.UserRepository.findUniqueBySurname(data.surname);
     if (isExistEmploee) throw new BadRequestException('This emploee already exist');
     delete data._id;
-    await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday) });
     const link = uuidv4();
+    await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday), link });
     return { link };
   };
 
@@ -69,6 +70,24 @@ export class AuthUseCase {
       throw new BadRequestException("You are already logout");
     }
     await this.TokenRepository.delete(token.id);
-    return { message: "Logout success" };
+    return { message: 'Logout success' };
   };
+
+  public async validateLink(linkId: string): Promise<ResultAuthorization.IResultLogout> {
+    const user = await this.UserRepository.findUserByLink(linkId);
+    if(!user) throw new BadRequestException('Not found user');
+    return {message: 'success'};
+  };
+
+  public async createPassword(data: CreatePasswordDto): Promise<ResultAuthorization.IResultLogin> {
+    const isExistUser = await this.UserRepository.findUserByLink(data.linkId);
+    if(!isExistUser) throw new BadRequestException('Not found user');
+    const hashPassword = await this.bcrypt.hash(data.password);
+    const user = await this.UserRepository.udpatePasswordById(isExistUser.id, hashPassword);
+    await this.UserRepository.setLinkNullById(user.id);
+    const [access, refresh] = this.generateTokens(user);
+    await this.TokenRepository.createWithoutRelationUser(refresh, user.id);
+    const header = this.generateHeader(refresh);
+    return {access, user, header };
+  }
 };

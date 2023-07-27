@@ -8,4 +8,5 @@ export class EmploeeModel {
   public dateBirthday: Date;
   public salary?: number;
   public password?: string;
+  public link?: string;
 }

@@ -3,6 +3,7 @@ import { UserAbstractReposiotory } from "src/domain/repositories/user-repository
 import { PrismaService } from "src/infrastructure/config/prisma.config";
 import { EmploeeModel } from "src/domain/models/Emploee.model";
 import { EmploeeEntity, JonTitle } from "@prisma/client";
+import { GetResult } from "@prisma/client/runtime";
 
 @Injectable()
 export class UserRepository implements UserAbstractReposiotory {
@@ -33,4 +34,22 @@ export class UserRepository implements UserAbstractReposiotory {
       where: { surname }
     })
   };
+
+  public async findUserByLink(link: string): Promise<EmploeeEntity> {
+    return await this.prisma.emploeeEntity.findUnique({
+      where: { link }
+    })
+  };
+
+  public async udpatePasswordById(id: string, password: string): Promise<EmploeeEntity> {
+    return await this.prisma.emploeeEntity.update({
+      where: { id }, data: { password }
+    })
+  };
+
+  public async setLinkNullById(id: string): Promise<EmploeeEntity> {
+    return await this.prisma.emploeeEntity.update({
+      where: {id}, data: {link: null}
+    })
+  }
 }
