@@ -8,6 +8,7 @@ import { BcryptService } from "src/infrastructure/services/bcrypt/bcrypt.service
 import { ConfigService } from "@nestjs/config";
 import { BcryptModule } from "src/infrastructure/services/bcrypt/bcrypt.module";
 import { AuthUseCase } from "./usecase-blocks/auth.usecase";
+import { StatisticRepository } from "src/infrastructure/repositories/statistic-repository/statistic.repository";
 
 @Module({})
 export class AuthUseCaseModule {
@@ -18,14 +19,15 @@ export class AuthUseCaseModule {
       module: AuthUseCaseModule,
       providers: [
         {
-          inject: [UserRepository, TokensRepository, BcryptService, JwtAdapter, ConfigService],
+          inject: [UserRepository, TokensRepository, BcryptService, JwtAdapter, ConfigService, StatisticRepository],
           useFactory: (
             userRepo: UserRepository,
             tokenRepo: TokensRepository,
             bcrypt: BcryptService,
             jwt: JwtAdapter,
-            config: ConfigService
-          ) => new AuthUseCase(userRepo, tokenRepo, bcrypt, jwt, config),
+            config: ConfigService,
+            statisticRepo: StatisticRepository
+          ) => new AuthUseCase(userRepo, tokenRepo, bcrypt, jwt, config, statisticRepo),
           provide: this.AUTHORIZATION
         }
       ],

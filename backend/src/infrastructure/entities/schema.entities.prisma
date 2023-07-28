@@ -12,6 +12,11 @@ enum JonTitle {
   EMPLOEE
 }
 
+enum StatusEmploee {
+  DELETE
+  WORK
+}
+
 model EmploeeEntity {
   id            String       @id @default(uuid())
   name          String
@@ -31,4 +36,13 @@ model TokenEntity {
   token     String
   emploee   EmploeeEntity? @relation(fields: [emploeeId], references: [id], onDelete: Cascade)
   emploeeId String?        @unique
+}
+
+
+
+model StatisticEmploee {
+  id String         @id @default(uuid())
+  emploeeId String @unique
+  type StatusEmploee
+  time DateTime
 }

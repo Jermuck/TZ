@@ -1,13 +1,17 @@
-import { DataGrid, GridCellParams, GridColDef, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
 import { IUser, IUserForTable } from '../../../types/index.types';
 import { Box } from '@mui/material';
 import { useStore } from 'effector-react';
 import { $user } from '../../store/UserStore/user.store';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 interface IEmploeeItem{
     users: IUserForTable[];
-    setDeleteEmploee: (array: GridRowSelectionModel) => void;
+    isCheckBox: boolean;
+    setDeleteEmploee?: (array: GridRowSelectionModel) => void;
+    mgTop?: number;
+    width?: string;
+    height?: string | number;
 }
 
 const columns: GridColDef[] = [
@@ -21,13 +25,13 @@ const columns: GridColDef[] = [
     { field: 'password', headerName: 'authentication', type: 'boolean', width: 140 },
 ];
 
-export const EmploeeItem: FC<IEmploeeItem> = ({
-    users, setDeleteEmploee
+export const EmploeeTable: FC<IEmploeeItem> = ({
+    users, setDeleteEmploee, isCheckBox, mgTop = 0, width = '100%', height = '100vh'
 }) => {
     const user = useStore($user);
 
     return (
-        <Box width={'100%'} height={'100vh'} bgcolor={'white'}>
+        <Box width={width} height={height} bgcolor={'white'} marginTop={mgTop}>
             <DataGrid
                 rows={users}
                 columns={columns}
@@ -38,7 +42,7 @@ export const EmploeeItem: FC<IEmploeeItem> = ({
                 }}
                 pageSizeOptions={[5, 10]}
                 disableRowSelectionOnClick={true}
-                checkboxSelection={user?.jobTitle === 'HR_MANAGER' ? true : false}
+                checkboxSelection={(user?.jobTitle === 'HR_MANAGER' && isCheckBox) ? true : false}
                 onRowSelectionModelChange={setDeleteEmploee}
             />
         </Box>

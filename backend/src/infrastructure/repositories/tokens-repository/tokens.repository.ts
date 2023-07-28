@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { EmploeeEntity, TokenEntity } from "@prisma/client";
 import { GetResult } from "@prisma/client/runtime/library";
-import { TokenAbstractRepository } from "src/domain/repositories/token-repository/token-repository.adapter";
+import { TokenAbstractRepository } from "src/domain/repositories/token-repository/token-repository.abstract";
 import { PrismaService } from "src/infrastructure/config/prisma.config";
 
 @Injectable()

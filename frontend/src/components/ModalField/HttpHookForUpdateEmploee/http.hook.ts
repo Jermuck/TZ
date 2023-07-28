@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { IEmploee } from "../../ModalItems/ModalItems";
-import { EmploeeController } from "../../../http/controllers/EmploeeController/EmploeeController";
+import { EmploeeController } from "../../../http/controllers/EmploeeController/emploee.controller";
 import { IUser } from "../../../../types/index.types";
+import { setLoading } from "../../../store/LoadingStore/loading.store";
 
 interface IUseUdpateEmploee{
     error: boolean;
@@ -26,10 +27,13 @@ export const useUpdateEmploee = (): IUseUdpateEmploee => {
                 showError();
                 return;
             }
+            setLoading(true)
             const apiInstance = EmploeeController.getInstance();
             const {data} = await apiInstance.updateEmploee(payload);
+            setLoading(false)
             return data.data;
         }catch(err){
+            setLoading(false)
             console.log(err)
             showError();
         }

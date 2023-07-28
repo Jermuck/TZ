@@ -2,7 +2,7 @@ import { BadRequestException, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { UserAbstractReposiotory } from "src/domain/repositories/user-repository/user-repository.abstract";
 import { BcryptAbstractAdapter } from "src/domain/adapters/bcrypt-adapter/bcrypt.adapter";
-import { TokenAbstractRepository } from "src/domain/repositories/token-repository/token-repository.adapter";
+import { TokenAbstractRepository } from "src/domain/repositories/token-repository/token-repository.abstract";
 import { JwtAbstractAdapter } from "src/domain/adapters/jwt-adapter/jwt.adapter";
 import { EmploeeEntity } from "@prisma/client";
 import { v4 as uuidv4 } from 'uuid';
@@ -10,6 +10,7 @@ import { EmploeeRegisterDto } from "src/infrastructure/controllers/auth/dto/empl
 import { ResultAuthorization } from "../response-data/response.interfaces";
 import { EmploeeLoginDto } from "src/infrastructure/controllers/auth/dto/emploee.login.dto";
 import { CreatePasswordDto } from "src/infrastructure/controllers/auth/dto/createPassword.dto";
+import { StatisticAbstractRepository } from "src/domain/repositories/statistic-repository/statistic-repository.abstract";
 
 export class AuthUseCase {
   constructor(
@@ -17,7 +18,8 @@ export class AuthUseCase {
     private readonly TokenRepository: TokenAbstractRepository,
     private readonly bcrypt: BcryptAbstractAdapter,
     private readonly JwtService: JwtAbstractAdapter<EmploeeEntity>,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
+    private readonly StatisticRepository: StatisticAbstractRepository
   ) { };
 
   private generateTokens(user: EmploeeEntity): [string, string] {
@@ -34,7 +36,8 @@ export class AuthUseCase {
     const isExistEmploee = await this.UserRepository.findUniqueBySurname(data.surname);
     if (isExistEmploee) throw new BadRequestException('This emploee already exist');
     const link = uuidv4();
-    await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday), link });
+    const user = await this.UserRepository.create({ ...data, jobTitle: 'EMPLOEE',dateBirthday: new Date(data.dateBirthday), link });
+    await this.StatisticRepository.create({emploeeId: user.id, type: 'WORK', time: user.dateStartWork});
     return { link };
   };
 

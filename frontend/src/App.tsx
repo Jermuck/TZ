@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { setUpdateAccessToken } from './Hooks/hook.updateAccces';
 import { PasswordPage } from './pages/PasswordPage/PasswordPage';
 import { EmploeePage } from './pages/EmploeePage/EmploeePage';
+import { MetricPage } from './pages/MetricPage/MetricPage';
 
 function App() {
   const user = useStore($user);
@@ -22,7 +23,8 @@ function App() {
           <Route path={'/auth'} element={user ? <Navigate to={'/home'}/> : <AuthPage />}/>
           <Route path={'/home'} element={user ? <HomePage /> : <Navigate to={'/auth'}/>} />
           <Route path={'statistic'} element={user ? <EmploeePage/> : <Navigate to={'/auth'}/>}/>
-          <Route path='/:linkId' element={user ? <Navigate to={'/home'}/> : <PasswordPage/>}/>
+          <Route path={'/:linkId'} element={user ? <Navigate to={'/home'}/> : <PasswordPage/>}/>
+          <Route path={'/metric'} element={(user?.jobTitle === 'HR_MANAGER') ? <MetricPage/> : <Navigate to={'/home'}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

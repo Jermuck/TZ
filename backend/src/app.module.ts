@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './infrastructure/controllers/auth/auth.module';
 import { EmploeeModule } from './infrastructure/controllers/emploee/emploee.module';
+import { StatisticModule } from './infrastructure/controllers/statistic/statistic.module';
 
 @Module({
   imports: [
@@ -10,7 +11,8 @@ import { EmploeeModule } from './infrastructure/controllers/emploee/emploee.modu
       envFilePath: `.env`
     }),
     AuthModule,
-    EmploeeModule
+    EmploeeModule,
+    StatisticModule
   ],
 })
 export class AppModule { };

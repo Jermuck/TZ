@@ -1,16 +1,15 @@
 import { Box, Button, Modal } from "@mui/material"
 import { Theme } from "../../components/Theme/Theme"
 import { useNavigate } from "react-router-dom"
-import { EmploeeItem } from "../../components/EmploeeItem/EmploeeItem";
+import { EmploeeTable } from "../../components/EmploeeTable/EmploeeTable";
 import { useEffect, useState } from "react";
 import { IUserForTable } from "../../../types/index.types";
 import { asyncGetEmploee } from "./HttpHookForGetEmploee/http.hook";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useStore } from "effector-react";
 import { $user } from "../../store/UserStore/user.store";
-import { asyncDeleteEmploee } from "../../components/EmploeeItem/HttpHookForDeleteEmploee/http.hook";
+import { asyncDeleteEmploee } from "../../components/EmploeeTable/HttpHookForDeleteEmploee/http.hook";
 import { ModalField } from "../../components/ModalField/ModalField";
-import { IEmploee } from "../../components/ModalItems/ModalItems";
 
 export const EmploeePage = () => {
     const nav = useNavigate();
@@ -73,14 +72,14 @@ export const EmploeePage = () => {
             </Modal>
             <Box width={'100%'} height={60} bgcolor={'#252838'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box fontSize={25} color={'#FFFF'} marginLeft={15}>Statistic</Box>
-                <Box width={!isShowChangeButton ? '20%': '30%'} display={'flex'} justifyContent={'space-between'} marginRight={15}>
+                <Box width={!isShowChangeButton ? '20%': '30%'} display={'flex'} justifyContent={user?.jobTitle === 'EMPLOEE' ? 'flex-end' : 'space-between'} marginRight={15}>
                     {(isShowDeleteButton && user?.jobTitle === 'HR_MANAGER') &&  <Button style={{ background: '#343A4F', height: '60%' }} onClick={onDelete}>Delete</Button>}
                     {(isShowChangeButton && user?.jobTitle === 'HR_MANAGER') &&  <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => setIsShowModal(true)}>Change</Button>}
                     <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/home')}>Back</Button>
-                    <Button style={{ background: '#343A4F', height: '60%' }}>Metric</Button>
+                    {user?.jobTitle === 'HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/metric')}>Metric</Button>}
                 </Box>
             </Box>
-            <EmploeeItem setDeleteEmploee={setEmploee} users={users}/>
+            <EmploeeTable setDeleteEmploee={setEmploee} users={users} isCheckBox={true}/>
         </Theme>
     )
 }

@@ -11,4 +11,5 @@ export abstract class UserAbstractReposiotory {
   abstract setLinkNullById(id: string): Promise<EmploeeEntity>;
   abstract findManyWithJobTitleEmploee(): Promise<EmploeeEntity[]>;
   abstract updateFieldsWithUserId(id: string, data: EmploeeModel): Promise<EmploeeEntity>;
+  abstract findMany(): Promise<EmploeeEntity[]>
 };

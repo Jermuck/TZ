@@ -18,5 +18,6 @@ export class EmploeeController {
 
     public async updateEmploee(data: IEmploee): Promise<AxiosResponse<IResponseData<IUser>>>{
         return await $api.post<IResponseData<IUser>>('/emploee/update', data);
-    }
+    };
+
 }

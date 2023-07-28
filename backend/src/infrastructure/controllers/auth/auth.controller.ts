@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Inject, Param, Post, Request, UseGuards, UsePipes } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, Inject, Param, Post, Request, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { Request as Req } from "express";
 import { AuthUseCaseModule } from "src/use-cases/auth-usecases/auth.usecases-proxy";
 import { AuthUseCase } from "src/use-cases/auth-usecases/usecase-blocks/auth.usecase";
@@ -18,7 +18,7 @@ export class AuthController {
   @Post('/emploee/register')
   @HttpCode(200)
   @UseGuards(JobTitleGuard)
-  public async adminRegister(@Body() dto: EmploeeRegisterDto, @Request() req: Req) {
+  public async adminRegister(@Body(new ValidationPipe({whitelist: true})) dto: EmploeeRegisterDto, @Request() req: Req) {
     const { link } = await this.AuthorizationUseCaseInstanse.registerEmploee(dto);
     return link;
   };

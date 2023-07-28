@@ -13,7 +13,7 @@ async function bootstrap(): Promise<void> {
     credentials: true,
     origin: 'http://localhost:3000'
   })
-  app.useGlobalPipes(new ValidationPipe({whitelist: true}));
+  app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix("/api");
   app.use(cookieParser())
   app.useGlobalInterceptors(new ResponseInterceptor());

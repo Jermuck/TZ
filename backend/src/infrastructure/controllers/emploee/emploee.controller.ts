@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Inject, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpCode, Inject, Post, UseGuards, ValidationPipe } from "@nestjs/common";
 import { AuthGuard } from "src/infrastructure/common/guards/auth.guard";
 import { JobTitleGuard } from "src/infrastructure/common/guards/jobTitle.guard";
 import { EmploeeUseCaseModule } from "src/use-cases/emploee-usecases/emploee.usecases-proxy";
@@ -30,8 +30,7 @@ export class EmploeeController {
     @Post('/update')
     @HttpCode(200)
     @UseGuards(JobTitleGuard)
-    public async update(@Body() dto: UpdateEmploeeDto){
-        console.log(dto)
+    public async update(@Body( new ValidationPipe({whitelist: true})) dto: UpdateEmploeeDto){
         return await this.EmploeeUseCaseInstance.update(dto);
-    }
+    };
 }

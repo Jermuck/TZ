@@ -1,4 +1,4 @@
-import { IsDataURI, IsDate, IsDateString, IsNumber, Length, isDateString } from "class-validator";
+import { IsDataURI, IsDate, IsDateString, IsNumber, IsString, Length, isDateString } from "class-validator";
 
 export class BodyCanActivate {
   public _id: string;
