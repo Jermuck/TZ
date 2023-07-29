@@ -16,19 +16,23 @@ export const MetricPage = () => {
     };
 
     useEffect(() => {
-        getData()
-    }, [])
+        getData();
+    }, []);
+
     return (
         <Theme>
             <Box width={'100%'} height={60} bgcolor={'#252838'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box fontSize={25} color={'#FFFF'} marginLeft={15}>Statistic</Box>
+                <Box width={'25%'} display={'flex'} justifyContent={'space-beetwen'}>
                 <Button style={{ background: '#343A4F', height: '60%', marginRight: 120 }} onClick={() => nav('/statistic')}>Back</Button>
+                <Button style={{ background: '#343A4F', height: '60%', marginRight: 120 }} onClick={() => nav('/charts')}>Chart</Button>
+                </Box>
             </Box>
             <Box width={'100%'} height={'100vh'} bgcolor={'white'}>
                 <TableStatistic />
                 <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
                     <Box fontSize={20} marginTop={2}>Birthday Statistic</Box>
-                    <EmploeeTable users={data} isCheckBox={false} mgTop={2} width={'97%'} height={300}/>
+                    <EmploeeTable users={data} isCheckBox={false} mgTop={2} width={'97%'} height={400}/>
                 </Box>
             </Box>
         </Theme>

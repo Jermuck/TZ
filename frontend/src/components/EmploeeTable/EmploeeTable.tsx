@@ -5,18 +5,18 @@ import { useStore } from 'effector-react';
 import { $user } from '../../store/UserStore/user.store';
 import { FC } from 'react';
 
-interface IEmploeeItem{
+interface IEmploeeItem {
     users: IUserForTable[];
     isCheckBox: boolean;
     setDeleteEmploee?: (array: GridRowSelectionModel) => void;
     mgTop?: number;
-    width?: string;
+    width?: string | number;
     height?: string | number;
 }
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 340 },
-    {field: 'name', headerName: 'Name', width: 130},
+    { field: 'name', headerName: 'Name', width: 130 },
     { field: 'surname', headerName: 'Surname', width: 130 },
     { field: 'patronymic', headerName: 'Patronymic', width: 130 },
     { field: 'salary', headerName: 'Salary', type: 'string', width: 130 },
@@ -26,25 +26,25 @@ const columns: GridColDef[] = [
 ];
 
 export const EmploeeTable: FC<IEmploeeItem> = ({
-    users, setDeleteEmploee, isCheckBox, mgTop = 0, width = '100%', height = '100vh'
+    users, setDeleteEmploee, isCheckBox, mgTop = 0, width = '100%', height = '100%'
 }) => {
     const user = useStore($user);
 
     return (
-        <Box width={width} height={height} bgcolor={'white'} marginTop={mgTop}>
-            <DataGrid
-                rows={users}
-                columns={columns}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                    },
-                }}
-                pageSizeOptions={[5, 10]}
-                disableRowSelectionOnClick={true}
-                checkboxSelection={(user?.jobTitle === 'HR_MANAGER' && isCheckBox) ? true : false}
-                onRowSelectionModelChange={setDeleteEmploee}
-            />
-        </Box>
+            <Box width={width} height={height} bgcolor={'white'} marginTop={mgTop} display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                <DataGrid
+                    rows={users}
+                    columns={columns}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 10 },
+                        },
+                    }}
+                    pageSizeOptions={[10, 15]}
+                    disableRowSelectionOnClick={true}
+                    checkboxSelection={(user?.jobTitle === 'HR_MANAGER' && isCheckBox) ? true : false}
+                    onRowSelectionModelChange={setDeleteEmploee}
+                />
+            </Box>
     );
 }

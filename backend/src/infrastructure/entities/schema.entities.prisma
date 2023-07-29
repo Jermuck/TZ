@@ -42,7 +42,7 @@ model TokenEntity {
 
 model StatisticEmploee {
   id String         @id @default(uuid())
-  emploeeId String @unique
+  emploeeId String 
   type StatusEmploee
   time DateTime
 }
