@@ -1,6 +1,5 @@
 import { Box, TextField, Button } from "@mui/material"
 import { FC, useState } from "react";
-import { IEmploee } from "../ModalItems/ModalItems";
 import { useUpdateEmploee } from "./HttpHookForUpdateEmploee/http.hook";
 import { IUserForTable } from "../../../types/index.types";
 

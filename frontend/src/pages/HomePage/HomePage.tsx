@@ -1,4 +1,4 @@
-import { Alert, Box, Button, LinearProgress, Modal, Snackbar } from "@mui/material"
+import { Alert, Box, Button, Modal, Snackbar } from "@mui/material"
 import { useStore } from "effector-react"
 import { $user } from "../../store/UserStore/user.store";
 import { Theme } from "../../components/Theme/Theme";

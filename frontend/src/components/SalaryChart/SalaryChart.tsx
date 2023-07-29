@@ -106,7 +106,7 @@ export const SalaryChart = () => {
 
     useEffect(() => {
         getData()
-    }, [])
+    }, []);
 
     return <Line options={options} data={data}/>;
 };

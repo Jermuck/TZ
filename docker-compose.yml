@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - nest-api
+  db:
+    image: postgres:15.3
+    container_name: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=TZ
+  nest-api:
+    container_name: nest-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4444:4444"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - db

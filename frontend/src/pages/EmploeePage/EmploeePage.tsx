@@ -10,7 +10,6 @@ import { useStore } from "effector-react";
 import { $user } from "../../store/UserStore/user.store";
 import { asyncDeleteEmploee } from "../../components/EmploeeTable/HttpHookForDeleteEmploee/http.hook";
 import { ModalField } from "../../components/ModalField/ModalField";
-import { Calculate } from "@mui/icons-material";
 
 export const EmploeePage = () => {
     const nav = useNavigate();

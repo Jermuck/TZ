@@ -1,5 +1,4 @@
 import { Box, Button } from "@mui/material"
-import { Theme } from "../../components/Theme/Theme"
 import { useNavigate } from "react-router-dom"
 import { SalaryChart } from "../../components/SalaryChart/SalaryChart";
 
