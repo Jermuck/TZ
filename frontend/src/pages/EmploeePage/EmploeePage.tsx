@@ -68,7 +68,9 @@ export const EmploeePage = () => {
     return (
         <Theme>
             <Modal open={isShowModal} onClose={() => setIsShowModal(false)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <ModalField data={updateObject} setModalOpen={value => setIsShowModal(value)} setNewDateEmploee={setUpdateDateToEmploee} />
+                <Box>
+                    <ModalField data={updateObject} setModalOpen={value => setIsShowModal(value)} setNewDateEmploee={setUpdateDateToEmploee} />
+                </Box>
             </Modal>
             <Box width={'100%'} height={60} bgcolor={'#252838'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box fontSize={25} color={'#FFFF'} marginLeft={15}>Statistic</Box>
@@ -79,9 +81,9 @@ export const EmploeePage = () => {
                     {user?.jobTitle === 'HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/metric')}>Metric</Button>}
                 </Box>
             </Box>
-            <Box style={{width: '100%', height: window.innerHeight - 60, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                <EmploeeTable setDeleteEmploee={setEmploee} users={users} isCheckBox={true} width={'98%'} height={'80%'}/>
+            <Box style={{ width: '100%', height: window.innerHeight - 60, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <EmploeeTable setDeleteEmploee={setEmploee} users={users} isCheckBox={true} width={'98%'} height={'80%'} />
             </Box>
-            </Theme>
+        </Theme>
     )
 }

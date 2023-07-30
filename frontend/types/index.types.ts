@@ -30,13 +30,12 @@ export interface ILogoutResponse{
   message: string;
 };
 
-
 export interface IUserForTable {
   id: string;
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
+  jobTitle: string;
   salary: number;
   password: boolean;
   dateStartWork: Date;

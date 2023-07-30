@@ -8,8 +8,8 @@ import { useState } from "react";
 import { ModalItems } from "../../components/ModalItems/ModalItems";
 import { useNavigate } from "react-router-dom";
 
-export interface IMessage{
-    isOpen:boolean;
+export interface IMessage {
+    isOpen: boolean;
     value: string;
 }
 
@@ -18,7 +18,7 @@ export const HomePage = () => {
     const logout = useLogout();
     const nav = useNavigate();
     const [isOpen, setModalOpen] = useState<boolean>(false);
-    const [message, setMessage] = useState<IMessage>({isOpen: false, value: ''});
+    const [message, setMessage] = useState<IMessage>({ isOpen: false, value: '' });
 
     function convertTime(date: Date): string {
         const day = date.getDate().toString().length === 1 ? '0' + date.getDate().toString() : date.getDate().toString();
@@ -27,20 +27,22 @@ export const HomePage = () => {
     }
     return (
         <Theme>
-            <Snackbar open={message.isOpen}  onClose={() => setMessage({ isOpen: false, value: '' })}>
+            <Snackbar open={message.isOpen} onClose={() => setMessage({ isOpen: false, value: '' })}>
                 <Alert severity="success" sx={{ width: '100%' }} onClose={() => setMessage({ isOpen: false, value: '' })}>
                     This is link for emploee: {message.value} !
                 </Alert>
             </Snackbar>
             <Modal open={isOpen} onClose={() => setModalOpen(false)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <ModalItems setModal={val => setModalOpen(val)} setMessage={val => setMessage(val)}/>
+                <Box>
+                    <ModalItems setModal={val => setModalOpen(val)} setMessage={val => setMessage(val)} />
+                </Box>
             </Modal>
             <Box width={'100%'} height={60} bgcolor={'#252838'} display={'flex'} justifyContent={'space-between'} alignItems={'center'}>
                 <Box fontSize={25} color={'#FFFF'} marginLeft={15}> Home</Box>
-                <Box width={user?.jobTitle ==='HR_MANAGER' ? '35%' : '15%'} display={'flex'} justifyContent={'space-between'} marginRight={15}>
+                <Box width={user?.jobTitle === 'HR_MANAGER' ? '35%' : '15%'} display={'flex'} justifyContent={'space-between'} marginRight={15}>
                     <Button style={{ background: '#343A4F', height: '60%' }} onClick={logout}>Logout</Button>
                     <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/statistic')}>Statistic</Button>
-                    { user?.jobTitle ==='HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => setModalOpen(true)}>Create Emploee</Button>}
+                    {user?.jobTitle === 'HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => setModalOpen(true)}>Create Emploee</Button>}
                 </Box>
             </Box>
             <Box height={'100vh'} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'center'}>
