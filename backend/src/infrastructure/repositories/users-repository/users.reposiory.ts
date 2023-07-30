@@ -29,9 +29,9 @@ export class UserRepository implements UserAbstractReposiotory {
     })
   };
 
-  public async findUniqueBySurname(surname: string): Promise<EmploeeEntity> {
-    return await this.prisma.emploeeEntity.findUnique({
-      where: { surname }
+  public async findUniqueByNames(surname: string, patronymic: string, name: string): Promise<EmploeeEntity> {
+    return await this.prisma.emploeeEntity.findFirst({
+      where: { surname, patronymic, name }
     })
   };
 

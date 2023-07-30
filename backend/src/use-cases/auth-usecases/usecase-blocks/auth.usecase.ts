@@ -29,11 +29,16 @@ export class AuthUseCase {
   };
 
   private generateHeader(token: string): string {
-    return `Refresh=${token}; HttpOnly; Path=/; Max-Age=${this.config.get<number>("TIME_REFRESH")}`
+    return `Refresh=${token}; HttpOnly; Path=/; SameSite=Strict; Max-Age=${this.config.get<number>("TIME_REFRESH")}`
   };
 
   public async registerEmploee(data: EmploeeRegisterDto): Promise<ResultAuthorization.IResultRegister> {
-    const isExistEmploee = await this.UserRepository.findUniqueBySurname(data.surname);
+    const {
+      name,
+      patronymic,
+      surname
+    } = data;
+    const isExistEmploee = await this.UserRepository.findUniqueByNames(surname, patronymic, name);
     if (isExistEmploee) throw new BadRequestException('This emploee already exist');
     if(data.salary < 1) throw new BadRequestException('Salary must be +')
     const link = uuidv4();
@@ -43,7 +48,12 @@ export class AuthUseCase {
   };
 
   public async login(data: EmploeeLoginDto): Promise<ResultAuthorization.IResultLogin> {
-    const isExistUser = await this.UserRepository.findUniqueBySurname(data.surname);
+    const {
+      name,
+      patronymic,
+      surname
+    } = data;
+    const isExistUser = await this.UserRepository.findUniqueByNames(surname, patronymic, name);
     if (!isExistUser) throw new BadRequestException('You unaftorized');
     const isPassword = await this.bcrypt.unHash(data.password, isExistUser.password);
     if (!isPassword) throw new BadRequestException('Invalid password');
@@ -62,6 +72,8 @@ export class AuthUseCase {
     if (!tokenWithRelation) throw new UnauthorizedException();
     const user = await this.UserRepository.getById(payload.id);
     const [access, refresh] = this.generateTokens(user);
+    const isExistToken = await this.TokenRepository.getByUserId(user.id);
+    if(!isExistToken) throw new BadRequestException('Not found token');
     await this.TokenRepository.update(tokenWithRelation.id, refresh);
     const header = this.generateHeader(refresh);
     return { user, access, header};
