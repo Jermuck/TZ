@@ -29,7 +29,7 @@ export const HomePage = () => {
         <Theme>
             <Snackbar open={message.isOpen}  onClose={() => setMessage({ isOpen: false, value: '' })}>
                 <Alert severity="success" sx={{ width: '100%' }} onClose={() => setMessage({ isOpen: false, value: '' })}>
-                    This is link for emploee: {message.value}!
+                    This is link for emploee: {message.value} !
                 </Alert>
             </Snackbar>
             <Modal open={isOpen} onClose={() => setModalOpen(false)} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
