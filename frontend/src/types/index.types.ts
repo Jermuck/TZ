@@ -19,7 +19,7 @@ export interface IUser {
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: JobTitle;
+  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
   salary: number;
   password: string | null;
   dateStartWork: Date;
@@ -40,7 +40,7 @@ export interface IUserForTable {
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: JobTitle;
+  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
   salary: number;
   password: boolean;
   dateStartWork: Date;

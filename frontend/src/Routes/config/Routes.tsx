@@ -20,7 +20,7 @@ export const MyRoutes = () => {
           setRoutes(getHrRoutes());
           break;
         default:
-          setRoutes(getNotLoginEmploee(emploee));
+          setRoutes(getNotLoginEmploee());
       }
     })
   }, [user]);

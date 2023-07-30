@@ -60,7 +60,9 @@ export const EmploeePage = () => {
         setUsers(prev => prev.map(el => {
             if (el.id === payload.id) return payload;
             return el;
-        }))
+        }));
+        setIsShowDeleteButton(false);
+        setIsShowChangeButton(false);
     }
 
     useEffect(() => { getEmploee() }, []);

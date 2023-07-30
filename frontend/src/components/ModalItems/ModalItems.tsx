@@ -17,7 +17,7 @@ interface IModalItems{
 }
 
 export const ModalItems: FC<IModalItems> = ({setModal, setMessage}) => {
-    const [emploee, setEmploee] = useState<IEmploee>({} as IEmploee);
+    const [emploee, setEmploee] = useState<IEmploee>({salary: 0} as IEmploee);
     const { error, create } = useCreateEmploee();
 
     async function createEmploee(){
@@ -35,7 +35,7 @@ export const ModalItems: FC<IModalItems> = ({setModal, setMessage}) => {
                 <TextField label={'surname'} error={error} size={'small'} style={{ width: '75%', marginTop: 20 }} onChange={e => setEmploee({ ...emploee, surname: e.target.value })} />
                 <TextField label={'patronymic'} error={error} size={'small'} style={{ width: '75%', marginTop: 20 }} onChange={e => setEmploee({ ...emploee, patronymic: e.target.value })} />
                 <TextField size={'small'} error={error} type={'date'} style={{ width: '75%', marginTop: 20 }} onChange={e => setEmploee({ ...emploee, dateBirthday: new Date(e.target.value) })} />
-                <TextField label={'salary'} error={error} size={'small'} type={'number'} style={{ width: '75%', marginTop: 20 }} onChange={e => setEmploee({ ...emploee, salary: +e.target.value })} />
+                <TextField error={error} label={'salary'} size={'small'} type={'number'} style={{ width: '75%', marginTop: 20 }} value={emploee.salary} onChange={e => setEmploee({ ...emploee, salary: +e.target.value.replace(/\D/g,'') })} />
             </Box>
             <Button onClick={createEmploee}>Submit</Button>
         </Box>
