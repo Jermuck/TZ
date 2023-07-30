@@ -79,9 +79,9 @@ export const EmploeePage = () => {
                     {user?.jobTitle === 'HR_MANAGER' && <Button style={{ background: '#343A4F', height: '60%' }} onClick={() => nav('/metric')}>Metric</Button>}
                 </Box>
             </Box>
-            <div style={{width: '100%', height: window.innerHeight - 60, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Box style={{width: '100%', height: window.innerHeight - 60, backgroundColor: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <EmploeeTable setDeleteEmploee={setEmploee} users={users} isCheckBox={true} width={'98%'} height={'80%'}/>
-            </div>
+            </Box>
             </Theme>
     )
 }
