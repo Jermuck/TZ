@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ILoginDtoUser } from "../../../../types/index.types";
+import { ILoginDtoUser } from "../../../types/index.types";
 import { AuthController } from "../../../http/controllers/AuthController/auth.controller";
 import { setUser } from "../../../store/UserStore/user.store";
 

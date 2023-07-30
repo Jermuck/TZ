@@ -1,7 +1,7 @@
 import { Box, TextField, Button } from "@mui/material"
 import { FC, useState } from "react";
 import { useUpdateEmploee } from "./HttpHookForUpdateEmploee/http.hook";
-import { IUserForTable } from "../../../types/index.types";
+import { IUserForTable } from "../../types/index.types";
 
 interface IModalField {
     data: IUserForTable;

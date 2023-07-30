@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { IEmploee } from "../../ModalItems/ModalItems";
 import { EmploeeController } from "../../../http/controllers/EmploeeController/emploee.controller";
-import { IUser } from "../../../../types/index.types";
+import { IUser } from "../../../types/index.types";
 import { setLoading } from "../../../store/LoadingStore/loading.store";
 
 interface IUseUdpateEmploee{

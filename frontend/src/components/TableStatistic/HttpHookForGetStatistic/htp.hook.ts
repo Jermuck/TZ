@@ -1,5 +1,4 @@
 import { StatisticController } from "../../../http/controllers/StatisticController/statistic.controller";
-import { setLoading } from "../../../store/LoadingStore/loading.store";
 import { ITableStatistic } from "../TableStatistic";
 
 export const asyncGetStatistic = async (): Promise<ITableStatistic[]> => {

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { ILogoutResponse, IResponseData, IUser } from "../../../../types/index.types";
+import { ILogoutResponse, IResponseData, IUser } from "../../../types/index.types";
 import { $api } from "../../config/http.config";
 import { IEmploee } from "../../../components/ModalItems/ModalItems";
 

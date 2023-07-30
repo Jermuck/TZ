@@ -5,6 +5,11 @@ export interface ILoginDtoUser {
   password: string;
 };
 
+export enum JobTitle {
+  HR_MANAGER = 'HR_MANAGER',
+  EMPLOEE = 'EMPLOEE'
+}
+
 export interface IResponseData<T> {
   data: T;
 };
@@ -14,7 +19,7 @@ export interface IUser {
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: 'HR_MANAGER' | 'EMPLOEE';
+  jobTitle: JobTitle;
   salary: number;
   password: string | null;
   dateStartWork: Date;
@@ -35,7 +40,7 @@ export interface IUserForTable {
   name: string;
   surname: string;
   patronymic: string;
-  jobTitle: string;
+  jobTitle: JobTitle;
   salary: number;
   password: boolean;
   dateStartWork: Date;

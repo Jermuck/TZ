@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef, GridRowSelectionModel } from '@mui/x-data-grid';
-import { IUserForTable } from '../../../types/index.types';
+import { IUserForTable } from '../../types/index.types';
 import { Box } from '@mui/material';
 import { useStore } from 'effector-react';
 import { $user } from '../../store/UserStore/user.store';

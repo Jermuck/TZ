@@ -1,5 +1,5 @@
 import {createEvent, createStore} from "effector";
-import {IUser} from "../../../types/index.types";
+import {IUser} from "../../types/index.types";
 
 export const setUser = createEvent<IUser | null>();
 

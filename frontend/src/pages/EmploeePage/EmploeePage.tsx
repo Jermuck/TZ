@@ -3,7 +3,7 @@ import { Theme } from "../../components/Theme/Theme"
 import { useNavigate } from "react-router-dom"
 import { EmploeeTable } from "../../components/EmploeeTable/EmploeeTable";
 import { useEffect, useState } from "react";
-import { IUserForTable } from "../../../types/index.types";
+import { IUserForTable } from "../../types/index.types";
 import { asyncGetEmploee } from "./HttpHookForGetEmploee/http.hook";
 import { GridRowSelectionModel } from "@mui/x-data-grid";
 import { useStore } from "effector-react";

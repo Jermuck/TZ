@@ -1,4 +1,4 @@
-import { IUserForTable } from "../../../../types/index.types";
+import { IUserForTable } from "../../../types/index.types";
 import { EmploeeController } from "../../../http/controllers/EmploeeController/emploee.controller";
 import { setLoading } from "../../../store/LoadingStore/loading.store";
 

@@ -1,6 +1,5 @@
-import { IUser } from "../../types/index.types";
+import { IUser } from "../types/index.types";
 import { AuthController } from "../http/controllers/AuthController/auth.controller";
-import { setLoading } from "../store/LoadingStore/loading.store";
 import { setUser } from "../store/UserStore/user.store"
 
 export const setUpdateAccessToken = async (): Promise<IUser | undefined> => {

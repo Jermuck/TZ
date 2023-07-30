@@ -10,7 +10,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { IUserForTable } from '../../../types/index.types';
+import { IUserForTable } from '../../types/index.types';
 import { asyncGetEmploee } from '../../pages/EmploeePage/HttpHookForGetEmploee/http.hook';
 
 interface IChart {

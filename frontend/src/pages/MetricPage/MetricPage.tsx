@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { TableStatistic } from "../../components/TableStatistic/TableStatistic"
 import { EmploeeTable } from "../../components/EmploeeTable/EmploeeTable"
 import { useEffect, useState } from "react"
-import { IUserForTable } from "../../../types/index.types"
+import { IUserForTable } from "../../types/index.types"
 import { asyncGetEmploee } from "../EmploeePage/HttpHookForGetEmploee/http.hook"
 
 export const MetricPage = () => {

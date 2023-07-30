@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IResponseData } from "../../../../types/index.types";
+import { IResponseData } from "../../../types/index.types";
 import { ITableStatistic } from "../../../components/TableStatistic/TableStatistic";
 import { $api } from "../../config/http.config";
 
