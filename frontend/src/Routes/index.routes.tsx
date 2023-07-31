@@ -16,17 +16,18 @@ export const getHrRoutes = (): IRouter[] => [
     { path: '/statistic', element: <EmploeePage /> },
     { path: '/metric', element: <MetricPage /> },
     { path: '/charts', element: <ChartPage /> },
-    { path: '*', element: <Navigate to={'/home'}/> },
+    { path: '*', element: <Navigate to={'/home'} /> },
 ];
 
 export const getEmploeeRoutes = (): IRouter[] => [
     { path: '/home', element: <HomePage /> },
     { path: '/statistic', element: <EmploeePage /> },
-    { path: '*', element: <Navigate to={'/home'}/> },
+    { path: '*', element: <Navigate to={'/home'} /> },
 ];
 
 export const getNotLoginEmploee = (): IRouter[] => [
     { path: '/auth', element: <AuthPage /> },
     { path: '/verify/:linkId', element: <PasswordPage /> },
-    {path: '*', element: <NotFoundPage/>},
+    { path: '/', element: <Navigate to={'/auth'} /> },
+    { path: '*', element: <NotFoundPage /> },
 ];
