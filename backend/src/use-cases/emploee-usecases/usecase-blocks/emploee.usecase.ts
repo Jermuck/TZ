@@ -11,7 +11,7 @@ export class EmploeeUseCase {
         private readonly statisticRepository: StatisticAbstractRepository
     ) { };
 
-    public mapToStatisticResult(data: StatisticEmploee[], type: IStatus, dbStatus: StatusEmploee, index: number): ResultEmploeeUseCase.IStatisticResult {
+    private mapToStatisticResult(data: StatisticEmploee[], type: IStatus, dbStatus: StatusEmploee, index: number): ResultEmploeeUseCase.IStatisticResult {
         return {
             id: index,
             type: type,

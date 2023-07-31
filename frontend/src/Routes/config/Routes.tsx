@@ -22,7 +22,6 @@ export const MyRoutes = () => {
         setRoutes(getHrRoutes());
         break;
       default:
-        console.log("Da")
         setRoutes(getNotLoginEmploee());
     };
   }, [user])
