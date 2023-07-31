@@ -9,27 +9,28 @@ import { $user } from "../../store/UserStore/user.store";
 export const MyRoutes = () => {
   const [routes, setRoutes] = useState<IRouter[]>([]);
   const user = useStore($user);
+  useEffect(() => {
+    setUpdateAccessToken()
+  }, []);
 
   useEffect(() => {
-    if(user) return;
-    setUpdateAccessToken().then(emploee => {
-      switch (emploee?.jobTitle) {
-        case (JobTitle.EMPLOEE):
-          setRoutes(getEmploeeRoutes())
-          break;
-        case (JobTitle.HR_MANAGER):
-          setRoutes(getHrRoutes());
-          break;
-        default:
-          setRoutes(getNotLoginEmploee());
-      }
-    })
-  }, [user]);
+    switch (user?.jobTitle) {
+      case (JobTitle.EMPLOEE):
+        setRoutes(getEmploeeRoutes())
+        break;
+      case (JobTitle.HR_MANAGER):
+        setRoutes(getHrRoutes());
+        break;
+      default:
+        console.log("Da")
+        setRoutes(getNotLoginEmploee());
+    };
+  }, [user])
 
   return (
     <Routes>
       {
-        routes.map(el => <Route path={el.path} element={el.element} key={el.path}/>)
+        routes.map(el => <Route path={el.path} element={el.element} key={el.path} />)
       }
     </Routes>
   )

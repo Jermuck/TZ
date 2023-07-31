@@ -23,7 +23,7 @@ export const ModalItems: FC<IModalItems> = ({setModal, setMessage}) => {
     async function createEmploee(){
         const linkId = await create(emploee);
         if(!linkId) return;
-        const link = `http://localhost:3000/${linkId}`;
+        const link = `http://localhost:3000/verify/${linkId}`;
         setMessage({isOpen: true, value: link});
         setModal(false);
     }

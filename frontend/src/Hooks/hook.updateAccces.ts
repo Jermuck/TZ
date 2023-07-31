@@ -2,7 +2,7 @@ import { IUser } from "../types/index.types";
 import { AuthController } from "../http/controllers/AuthController/auth.controller";
 import { setUser } from "../store/UserStore/user.store"
 
-export const setUpdateAccessToken = async (): Promise<IUser | undefined> => {
+export const setUpdateAccessToken = async (): Promise<IUser | null> => {
     try{
         const apiInstance = AuthController.getInstance();
         const {data} = await apiInstance.refresh()
@@ -12,5 +12,6 @@ export const setUpdateAccessToken = async (): Promise<IUser | undefined> => {
     }catch(err){
         setUser(null);
         localStorage.removeItem('access')
+        return null;
     }
 }

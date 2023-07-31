@@ -28,7 +28,7 @@ export const AuthPage = () => {
         </Box>
         <Button 
           style={{ width: '75%' }}
-          onClick={() => login({name, surname, patronymic, password})}
+          onClick={() => {login({name, surname, patronymic, password})}}
         >Confirm</Button>
       </Box>
     </Box>

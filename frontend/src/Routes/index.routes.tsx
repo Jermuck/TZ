@@ -5,6 +5,7 @@ import { MetricPage } from "../pages/MetricPage/MetricPage";
 import { ChartPage } from "../pages/ChartPage/ChartPage";
 import { AuthPage } from "../pages/AuthPage/AuthPage";
 import { PasswordPage } from "../pages/PasswordPage/PasswordPage";
+import { NotFoundPage } from "../pages/NotFoundPage/NotFoundPage";
 
 export interface IRouter {
     path: string;
@@ -26,6 +27,6 @@ export const getEmploeeRoutes = (): IRouter[] => [
 
 export const getNotLoginEmploee = (): IRouter[] => [
     { path: '/auth', element: <AuthPage /> },
-    { path: '/:linkId', element: <PasswordPage /> },
-    {path: '*', element: <Navigate to={'/auth'}/>},
+    { path: '/verify/:linkId', element: <PasswordPage /> },
+    {path: '*', element: <NotFoundPage/>},
 ];
