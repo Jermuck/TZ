@@ -11,6 +11,7 @@ export const MyRoutes = () => {
   const user = useStore($user);
 
   useEffect(() => {
+    if(user) return;
     setUpdateAccessToken().then(emploee => {
       switch (emploee?.jobTitle) {
         case (JobTitle.EMPLOEE):
@@ -28,7 +29,7 @@ export const MyRoutes = () => {
   return (
     <Routes>
       {
-        routes.map(el => <Route path={el.path} element={el.element} key={el.path} />)
+        routes.map(el => <Route path={el.path} element={el.element} key={el.path}/>)
       }
     </Routes>
   )
